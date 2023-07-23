@@ -1,0 +1,185 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15360\viewh11400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs32 \cf0 \
+//Question one\
+\
+void main() \{\
+ List<int> a = [1,1,2,3,5,8,13,21,34,55,89];\
+  // I am looping through each element in the list and check if it's less than 5\
+  for (int element in a)\{\
+    if(element < 5)\{\
+      print(element);\
+    \}\
+  \}\
+\}\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 //Question Two\
+\
+void main() \{\
+    \
+  List<int> a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];\
+  List<int> b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];\
+\
+  Set<int> commonElements = \{\};\
+\
+  for (int element in a) \{\
+    if (b.contains(element)) \{\
+      commonElements.add(element);\
+    \}\
+  \}\
+\
+  List<int> result = commonElements.toList();\
+  print(result);\
+\}\
+\
+\
+//Question Three\
+\
+void main() \{\
+  String inputString = "mum"; // Change this string to test different cases\
+\
+  bool isPalindrome = checkPalindrome(inputString);\
+  if (isPalindrome) \{\
+    print("$inputString is a palindrome.");\
+  \} else \{\
+    print("$inputString is not a palindrome.");\
+  \}\
+\}\
+\
+bool checkPalindrome(String str) \{\
+  int leftIndex = 0;\
+  int rightIndex = str.length - 1;\
+\
+  while (leftIndex < rightIndex) \{\
+    if (str[leftIndex] != str[rightIndex]) \{\
+      return false;\
+    \}\
+    leftIndex++;\
+    rightIndex--;\
+  \}\
+\
+  return true;\
+\}\
+\
+//Question Four\
+\
+void main() \{\
+  List<int> a = [5, 10, 15, 20, 25];\
+\
+  List<int> result = extractFirstAndLast(a);\
+  print(result);\
+\}\
+\
+List<int> extractFirstAndLast(List<int> numbers) \{\
+  if (numbers.isEmpty) \{\
+    throw ArgumentError("The input list must not be empty.");\
+  \}\
+\
+  int firstElement = numbers.first;\
+  int lastElement = numbers.last;\
+\
+  return [firstElement, lastElement];\
+\}\
+\
+\
+//Question Five\
+\
+void main() \{\
+  print("Please enter a long string containing multiple words:");\
+  String inputString = stdin.readLineSync();\
+\
+  String reversedString = reverseWords(inputString);\
+  print("Reversed string: $reversedString");\
+\}\
+\
+String reverseWords(String str) \{\
+  List<String> words = str.split(" ");\
+  List<String> reversedWords = words.reversed.toList();\
+  return reversedWords.join(" ");\
+\}\
+\
+\
+//Question Six\
+\
+void main() \{\
+  List<int> inputList = [1, 2, 2, 3, 4, 4, 5, 5, 5];\
+  List<int> uniqueList = removeDuplicates(inputList);\
+  print(uniqueList);\
+\}\
+\
+List<int> removeDuplicates(List<int> list) \{\
+  Set<int> uniqueElements = \{\};\
+\
+  for (int element in list) \{\
+    uniqueElements.add(element);\
+  \}\
+\
+  return uniqueElements.toList();\
+\}\
+\
+\
+Question Seven\
+//This this is the Jason file\
+\{\
+  "May": [3, 5],\
+  "November": [2],\
+  "December": [1, 4, 2]\
+\}\
+\
+//Extraction of the of the file\
+import 'dart:convert';\
+\
+void main() \{\
+  String jsonData = '''\
+  \{\
+    "May": [3, 5],\
+    "November": [2],\
+    "December": [1, 4, 2]\
+  \}\
+  ''';\
+\
+  Map<String, List<int>> birthdaysData = json.decode(jsonData);\
+\
+  List<String> months = extractMonths(birthdaysData);\
+  print("Months of all the birthdays: $months");\
+\
+  Map<String, int> birthdayCounts = countBirthdays(birthdaysData);\
+  print("Number of birthdays in each month: $birthdayCounts");\
+\
+  String monthWithHighest = findMonthWithHighest(birthdayCounts);\
+  String monthWithLowest = findMonthWithLowest(birthdayCounts);\
+\
+  print("Month with the highest number of birthdays: $monthWithHighest");\
+  print("Month with the lowest number of birthdays: $monthWithLowest");\
+\}\
+\
+List<String> extractMonths(Map<String, List<int>> birthdaysData) \{\
+  return birthdaysData.keys.toList();\
+\}\
+\
+Map<String, int> countBirthdays(Map<String, List<int>> birthdaysData) \{\
+  Map<String, int> birthdayCounts = \{\};\
+\
+  birthdaysData.forEach((month, birthdays) \{\
+    birthdayCounts[month] = birthdays.length;\
+  \});\
+\
+  return birthdayCounts;\
+\}\
+\
+String findMonthWithHighest(Map<String, int> birthdayCounts) \{\
+  return birthdayCounts.keys.reduce((a, b) => birthdayCounts[a]! > birthdayCounts[b]! ? a : b);\
+\}\
+\
+String findMonthWithLowest(Map<String, int> birthdayCounts) \{\
+  return birthdayCounts.keys.reduce((a, b) => birthdayCounts[a]! < birthdayCounts[b]! ? a : b);\
+\}\
+\
+}
